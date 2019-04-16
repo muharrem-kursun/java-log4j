@@ -1,0 +1,43 @@
+
+                                                   GENEL YAPTİĞİ İŞ
+
+        log4j komutlarını  log4j_kayit.txt adlı dosyaya yazdırıyor.
+
+
+                                                   BAĞIMLILIK (DEPENDENCY)
+
+        Java tüm kütüphaneleri kendi bünyesinde bulundurmaz biz bu kütüphaneleri kullanabilmek için  maven kullanmalıyız.
+        Maven projesinde maven önce kütüphaneyi bizim kütüphanelerimiz arasında arar yoksa kendi kütüphaneleri arasında arar
+        yine bulamazsa bizim pom.xml 'in içindeki  <dependencies> </dependencies> tagları arasına  verecemiz bağımlılıkları (dependency) kullanır.
+        Bizde burada aşağıdaki bağımlılı ekliyoruz
+         <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+             </dependency>
+        Bu bağımlılığa aşağıdaki adresten ulaşabilirsiniz.
+        https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+
+                                                   App.java SINIFI
+
+        Bu sınıf main sınıfımız ve asıl işin yapıldığı sınıftır.
+        static  final Logger LOGGER = Logger.getLogger(App.class);//bir logger nesnesi oluşturduk
+        PropertyConfigurator.configure("C:\\Users\\Muharrem\\Desktop\\java-log4j\\ilkornek\\src\\main\\java\\log4j.properties");//log4j.properties  dosyamızı programa entegre ettim
+        Bu iki nesneyi eklediğimiz bağımlılık sayesinde import ettim.
+
+         LOGGER.debug("debug message");
+         LOGGER.info("info message");
+         LOGGER.warn("warn message");
+         LOGGER.error("error message");
+         LOGGER.fatal("fatal message");
+
+         yukardakiler yazdırma işlemi için
+
+
+
+                                                   log4j.properties.txt DOSYASI
+         Bu dosya loglama bilgilerini kayıt edeceğimiz dosyayı ve yazım formatını boyutunu vb şeyleri belirttiğimiz yerdir.
+         Bu dosyaya https://www.mkyong.com/logging/log4j-log4j-properties-examples/ adresiden olaşabilirsiniz.
+         Orada bu dosyanın yanısıra konsola yazdırma ve hem konsola hem dosyaya yazdırma dosyalarını bulabilirsiniz.
+
+

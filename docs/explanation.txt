@@ -1,0 +1,111 @@
+					
+                                                    LOGLAMA NEDÝR
+
+	Loglama bir uygulamanýn çalýþma zamanýn daki durumunu sistematik, okunabilir ve kontrol edilebilir þekilde saklama 
+        yöntemidir. Loglamayý testing , development ve debug süreçlerinde kullanabiliriz.
+
+	Loglamanýn 3 önemli durunumunu inceleyecek olursak ;
+
+	-Loglama, kontrol edilebilir olmalýdýr.
+	-Loglama, bir uygulamanýn durumunu açýklamalýdýr.
+	-Loglama, sistematik  olmalýdýr.
+
+						    SÝSTEMATÝK YAPI
+	
+         Loglama , sistematik bir yaklaþým icerisinde olmalýdýr. Kafamýza göre loglama yapamayýz. Loglamada belirli bir strateji
+	 belirlenmeli ve loglama da hangi bilgiler kullanýlacak secilmelidir. Mesala debug iþlemi için , sistem yöneticilerinin
+	 uygulamanýn performansýný belirlemesi için veya uygulamanýn günlük bakým iþlemleri  için loglama kullanýlabilir.
+	 Bu sebeble loglama stratejileri deðiþkenlik gösterebilir.
+
+						     KONTROL EDÝLEBÝLÝR
+
+	 Loglama islemini yapmak icin de tabiki uygulamamizda gerekli kodlari yazacaðiz. Bu kodlarda uygulamamizdaki diðer kodlar 
+         için uygulanan kontrollere tabi tutulacaktýr.Loglama iþlemini kodlarý her  kod gibi kotu veya iyi yazýlmýs olabilir.
+         Loglama iþlemi için yazilan kodlar iyi olduðu taktirde uygulamizin kalitesini arttýracaktýr. kotu yazýlýrsa performansý azaltabilir.
+         
+	 Ayrýca , loglama formatini kontrol edebiliriz. Loglama bilgisi ornegin XML formatina daha uygun olabilir. Farklý bir yapý için de duz text sekli daha uygun olabilir.
+         Hatta bu loglamayi veritabani uzerinde tutabiliriz. Bununla birlikte loglama yapýlacak dizin/lokasyonu da secebiliriz.
+						
+						    UYGULAMA DURUMU
+	 Loglama sonucunda ortaya cýkan bilgiler ise eger duzgun sekilde loglanmamýþ sa kullanýþsýz olabilir.
+	 Bu bilgilerin kullanýþlý olabilmesi için hangi durumlarýn loglanacagý duzgun bir sekilde tespit edilmelidir.
+	 Amacýmýz sistemin gerekli her durumunu aciklamak olmalýdýr.
+				 
+							
+ 						    LOGLAMANIN AVANTAJLARI
+	 
+          					-HIZLI HATA AYIKLAMA(DEBUG)
+         
+	  Bir problemle karsilastiðimizda , log kayitlari bize sorunun nereden kaynaklandiðini gösterecektir.
+          Ýyi yazýlmýþ bir loglama kodu sorunun asil kaynaginin nereden ciktigini daha kisa sürede bulmamizi saðlayacaktýr 
+	  bu da bize debug isleminde vakit kazandiracaktir.
+				
+		                                -KOLAY BAKIM 
+	
+	  Ýyi yazýlmýs loglama yapisi ile uygulamamizin bakimi/devam kolay olacaktýr.
+          Loglama kodlarinin sadece debug icin tutulmadýný biliyoruz.
+	  Bu log kayitlari bize sistem hakkinda bilgi verecektir bu bilgiler ýþýgýnda sistem bakimi daha kolay olacaktýr.
+
+
+				                 -GECMÝS
+
+	  Loglama bilgileri istenilen bir dizinde , istenilen bir dosya isminde  ornegin tarihsel bir ek olarak deneme_log_15_04_2019 seklinde tutulabilir.
+          içerik olarak da farklý formatlara uygun sekilde tutabileceðimizi belirtmistik. Geriye donuk olarak 
+	  bu loglanan dosyalar tutulur herhangi bir soruna veya farklý bir duruma karsi tutulabilir.
+ 
+
+						 -MALÝYET VE ZAMAN KAZANCI
+
+	  Ýyi yazýlmýs  loglama yapisi ile hizli hata ayýklama kolay bakim gibi zaman ve maliyet kazancý saðlayabilir.
+
+
+						LOGLAMANIN DEZAVANTAJLARI
+
+	 -Kötü tasarlamýþ loglama yapýsý sistem performasýnda dusukluge neden olabilir.
+	 -kullanissiz/gereksiz ciktilar ise yaramaz. Kötü cýktý/output karýsýlýga neden olabilir.
+         -loglama iþlemi uygulamamýza fazladan kod yazilmasini gerektirecektir ,bu nedenle yukaridaki 2 maddedeki durumlar soz konusu oldugunda 
+	  maliyet ve zaman kaybina neden olabilir.
+
+
+						LOG4J OZELLIKLERI VE MIMARISI
+		
+	  Log4j , Apache Software License'a sahip java ile yazýlmýþ reliable(güvenilir), hizli ,flexible (esneklik) loglama framework'udur.
+	  
+	  Log4j mimarisi katmanli bir yapýdadýr. Her katman farklý görevlerden olusmaktadýr. Bu katmanlý yapi flexible(esneklik)
+	  özelliðini saðlamaktadýr.
+		
+          Top Layer(Ust Katman), loglama bilgilerini alir, Middle Layer (Orta Katman) log bilgilerinin analizinden ve authorizing (etkilendirmeden)
+	  Bottom Layer(alt katman) ise formatlama ve log bilgilerinin ilgili dizine/hedefe göndermekten/kaydetmekten sorumludur.
+        
+          log4j framework yapýsýnda temel olarak 2 tip obje vardir.
+
+
+	                                       CORE OBJECT (TEMEL OBJELER)
+
+	  Bu objeler Log4j yapisi için zorunludur.(mandotary)
+	  
+	  Logger : Logger objesi Category objesi olarak da bilinir.Loglama bilgilerinin alýnmasýndan sorumludur.(Top Layer)
+		
+	  Appender : Appender objesi, loglama bilgilerinin ilgili dizine/hedefe göndermekten/kaydetmekten sorumludur.
+          Bu hedefler database ,dosya,console vb olabilir.(Bottom Level)
+
+	  Layout : Layout objesi , log bilgilerini formatlamak için kullanýlýr.Layout objesi loglarin rahat okunurlugunu saðlar (human-readable).
+		
+		
+					      SUPPORT OBJECTS (YARDIMCI OBJELER)
+		
+	   Logger , Appender ,Layout log4j mimarisinin temelini oluþturmaktadýr.Bununla birlikte log4j mimarisinde yardimci objeler bulunmaktadir.
+
+	   Level : Level objesi , loglama bilgilerini onceliklendirmede (priority) kullanýlýr.7 tane level bulunmaktadýr.(ALL , DEBUG , INFO , WARN , ERROR , FATAL , OFF )
+	   Loglama bilgileri aciga en cok level ALL durumunda cikacaktýr (publish). Tam tersi olarak level OFF durumunda hiçbir loglama bilgisi çýkmayacaktýr.   
+        
+	   Filter : Filter objesi loglanacak bilgileri analiz eder ve bu bilgilerin loglanip loglanmayacaðý kararini verir. Filter objesi , uygulamaya özel (application-specific)
+	   kriterlere gore istenmeyen loglama blgilerini ayirmak/elemek/filtrelemek için kullanýþlýdýr.
+
+	   ObjectRenderer : ObjectRenderer objesi, loglama framework'une/yapisina gelen farkli turdeki objelerin String olarak temsil edilmesini saðlar.
+		
+	   LogManager : LogManeger objesi , loglama frameworkunu yönetir konfigurasyon dosyasindan initial/ilk/baþlangýç düzenleme bilgilerini okumaktan sorumludur.
+
+		
+
+		
