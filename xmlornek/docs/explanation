@@ -1,0 +1,28 @@
+                                                    GENEL YAPTIĞI İŞ
+
+         DOMConfigurator.configure("write.xml"); komutu ile App sınıfı ile xml dosyası arasında bir bağlantı oluşturdum.
+         write.xml dosyasında ise static final Logger LOGGER = Logger.getLogger(App.class); komutu ile oluşturduğum LOGGER nesnesinin
+         durumlarını( info , debug , warn , fatal , error ) consola ve write.log dosyasına yazmasını belirttim.
+
+                                                    write.xml
+         <appender> ile loglama bilgilerinin nereye kayıt edileceğini belirtiyoruz.
+         Belirteceğimiz yer console , veritabanı veya dosya olabilir.
+
+         <layout class="org.apache.log4j.PatternLayout">
+                     <param name="ConversionPattern"
+                            value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L -%F:%L- %m%n" />
+                 </layout>
+          Yukarıdaki bu kısım loglama bilgilerinin yazım formatı içindir
+
+          <root>
+                  <level value="DEBUG" />
+                  <appender-ref ref="console" />
+                  <appender-ref ref="file" />
+              </root>
+           root kayıt yerlerinin ve seviyenin belirtildiği yerdir.
+
+            <param name="append" value="true" />// eğer true vermezsek bir önceki kayıtları siler program her çalıştığında sadece o programdaki
+            logları yazar
+                   <param name="maxFileSize" value="10MB" />//maximum  dosya boyutu
+                   <param name="maxBackupIndex" value="10" />//Saklanacak maksimum yedekleme dosyası sayısı.
+                   <param name="file" value="write.log" />//yazacağımız dosya adı
